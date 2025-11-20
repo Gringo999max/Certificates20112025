@@ -1,0 +1,49 @@
+{
+  "name": "b2b-wellbeing-pages",
+  "version": "1.0.0",
+  "description": "B2B Well-being страницы для корпоративных клиентов глэмпинг сертификатов. Включает 2 варианта страниц (Well-being фокус и ROI фокус) с интерактивным квизом и полной адаптивностью.",
+  "main": "components/CorporateB2BPage.tsx",
+  "scripts": {
+    "install": "npm install lucide-react motion"
+  },
+  "keywords": [
+    "b2b",
+    "wellbeing",
+    "corporate",
+    "react",
+    "typescript",
+    "tailwind",
+    "glamping",
+    "certificates"
+  ],
+  "author": "глэмпинги.рф",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "lucide-react": "^0.263.1",
+    "motion": "^10.16.2"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "components/**/*",
+    "styles/**/*",
+    "README.md",
+    "INTEGRATION.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "private"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
