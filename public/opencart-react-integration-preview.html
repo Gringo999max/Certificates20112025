@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подарочные сертификаты на глэмпинги - Глэмпинги.рф</title>
+    <meta name="description" content="Подарите близким незабываемый отдых на природе. Более 500 глэмпингов в 40 регионах России. Получатель сертификата сам выберет отель и дату.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Подарочные сертификаты на глэмпинги">
+    <meta property="og:description" content="Подарите близким незабываемый отдых на природе">
+    <meta property="og:type" content="website">
+
+    <style>
+        /* Mock OpenCart Header/Footer Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .opencart-header {
+            background: #232f3e;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .opencart-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .opencart-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        .opencart-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .opencart-nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .opencart-nav a:hover {
+            color: #10b981;
+        }
+
+        .opencart-footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .opencart-footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            color: #10b981;
+        }
+
+        /* SEO Content Layer */
+        .seo-layer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .seo-layer h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        .seo-layer p {
+            font-size: 1.125rem;
+            color: #4a5568;
+            line-height: 1.75;
+            margin-bottom: 30px;
+        }
+
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .certificate-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .certificate-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .certificate-card-content {
+            padding: 25px;
+        }
+
+        .certificate-card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .certificate-card p {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .certificate-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #047857;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-badge {
+            background: #fef3c7;
+            color: #78350f;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* React root - initially hidden */
+        #root:empty {
+            display: none;
+        }
+
+        #root:not(:empty) {
+            display: block;
+        }
+
+        /* Loading indicator */
+        .loading-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading-indicator.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preview-banner {
+            background: #fef3c7;
+            color: #78350f;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 2px solid #f59e0b;
+        }
+
+        .preview-banner a {
+            color: #047857;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Preview Banner -->
+<div class="preview-banner">
+    🎭 MOCK PREVIEW - OpenCart + React Integration Demo |
+    <a href="https://gringo999max.github.io/Certificates20112025/" target="_blank">Оригинальный React →</a>
+</div>
+
+<!-- Mock OpenCart Header -->
+<header class="opencart-header">
+    <div class="container">
+        <div class="opencart-logo">Глэмпинги.рф</div>
+        <nav class="opencart-nav">
+            <a href="#home">Главная</a>
+            <a href="#catalog">Каталог</a>
+            <a href="#certificates">Сертификаты</a>
+            <a href="#about">О нас</a>
+            <a href="#cart">Корзина (0)</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumbs -->
+<div style="max-width: 1200px; margin: 20px auto; padding: 0 20px;">
+    <ul style="display: flex; gap: 10px; list-style: none; padding: 0; color: #666;">
+        <li><a href="/" style="color: #047857; text-decoration: none;">Главная</a></li>
+        <li>›</li>
+        <li>Подарочные сертификаты</li>
+    </ul>
+</div>
+
+<!-- Loading Indicator -->
+<div class="loading-indicator active" id="loadingIndicator">
+    <div class="spinner"></div>
+    <p style="margin: 0; color: #666;">Загружаем React приложение...</p>
+</div>
+
+<!-- SEO Content Layer - Visible to search engines, hidden when React loads -->
+<div id="seo-content" class="seo-layer">
+
+    <!-- Hero Section (SEO) -->
+    <section class="hero-section">
+        <h2>Подарите близким отдых на природе</h2>
+        <p style="font-size: 1.25rem; margin-bottom: 20px;">
+            Получатель сертификата сам выберет отель и дату
+        </p>
+        <div class="hero-badge">
+            500+ объектов в 40 регионах России
+        </div>
+    </section>
+
+    <h1>Подарочные сертификаты на глэмпинги</h1>
+
+    <p>
+        Подарите близким незабываемый отдых на природе! Наши подарочные сертификаты дают возможность
+        самостоятельно выбрать глэмпинг из более чем 500 объектов в 40 регионах России и запланировать
+        идеальный отпуск в удобное время.
+    </p>
+
+    <!-- Certificates Grid (SEO) -->
+    <h2 style="font-size: 2rem; margin: 40px 0 30px; text-align: center;">
+        Выберите подарочный сертификат
+    </h2>
+
+    <div class="certificate-grid">
+        <!-- Certificate 1 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600" alt="Зимняя сказка">
+            <div class="certificate-card-content">
+                <h3>Зимняя сказка</h3>
+                <p>Подарочный сертификат на отдых в зимнем глэмпинге с панорамными окнами и уютным интерьером</p>
+                <div class="certificate-price">от 15 000 ₽</div>
+            </div>
+        </article>
+
+        <!-- Certificate 2 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600" alt="Романтический закат">
+            <div class="certificate-card-content">
+                <h3>Романтический закат</h3>
+                <p>Идеальный подарок для пары - отдых в романтическом глэмпинге с видом на природу</p>
+                <div class="certificate-price">от 15 000 ₽</div>
+            </div>
+        </article>
+
+        <!-- Certificate 3 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1523978591478-c753949ff840?w=600" alt="Семейное приключение">
+            <div class="certificate-card-content">
+                <h3>Семейное приключение</h3>
+                <p>Просторный глэмпинг для всей семьи с детской зоной и активностями на природе</p>
+                <div class="certificate-price">от 25 000 ₽</div>
+            </div>
+        </article>
+
+        <!-- Certificate 4 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1520483601560-47d368af5d4a?w=600" alt="Лесной уют">
+            <div class="certificate-card-content">
+                <h3>Лесной уют</h3>
+                <p>Уединенный отдых в лесу с современными удобствами и атмосферой единения с природой</p>
+                <div class="certificate-price">от 20 000 ₽</div>
+            </div>
+        </article>
+
+        <!-- Certificate 5 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600" alt="Морской бриз">
+            <div class="certificate-card-content">
+                <h3>Морской бриз</h3>
+                <p>Глэмпинг на берегу моря или озера с террасой и захватывающими видами</p>
+                <div class="certificate-price">от 30 000 ₽</div>
+            </div>
+        </article>
+
+        <!-- Certificate 6 -->
+        <article class="certificate-card">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" alt="Горные вершины">
+            <div class="certificate-card-content">
+                <h3>Горные вершины</h3>
+                <p>Отдых в горах с панорамными видами, свежим воздухом и активными развлечениями</p>
+                <div class="certificate-price">от 35 000 ₽</div>
+            </div>
+        </article>
+    </div>
+
+    <!-- How It Works (SEO) -->
+    <section style="margin-top: 80px; background: #f7fafc; padding: 60px 20px; border-radius: 20px;">
+        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 50px;">Как это работает?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+            <div style="text-align: center;">
+                <div style="background: #047857; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.5rem; font-weight: bold;">1</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Выберите сертификат</h3>
+                <p style="color: #4a5568;">Выберите номинал или конкретный глэмпинг из нашего каталога</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="background: #047857; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.5rem; font-weight: bold;">2</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Оформите заказ</h3>
+                <p style="color: #4a5568;">Укажите данные получателя и выберите способ доставки</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="background: #047857; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.5rem; font-weight: bold;">3</div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Получатель выбирает отдых</h3>
+                <p style="color: #4a5568;">Получатель активирует сертификат и бронирует проживание</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (SEO) -->
+    <section style="margin-top: 80px;">
+        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 40px;">Часто задаваемые вопросы</h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <summary style="font-size: 1.125rem; font-weight: 600; cursor: pointer; color: #1a202c;">
+                    Как долго действителен сертификат?
+                </summary>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.75;">
+                    Сертификат действителен в течение 1 года с момента покупки. Получатель может выбрать любую дату
+                    в пределах этого срока для бронирования глэмпинга.
+                </p>
+            </details>
+
+            <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <summary style="font-size: 1.125rem; font-weight: 600; cursor: pointer; color: #1a202c;">
+                    Можно ли обменять или вернуть сертификат?
+                </summary>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.75;">
+                    Да, неиспользованный сертификат можно вернуть в течение 14 дней с момента покупки.
+                    Также возможен обмен на сертификат другого номинала.
+                </p>
+            </details>
+
+            <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <summary style="font-size: 1.125rem; font-weight: 600; cursor: pointer; color: #1a202c;">
+                    Как получить сертификат?
+                </summary>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.75;">
+                    Доступны три варианта: электронный сертификат на email (моментально),
+                    печатный в красивом конверте (доставка 3-5 дней), или подарочная коробка с сертификатом (доставка 3-5 дней).
+                </p>
+            </details>
+        </div>
+    </section>
+
+</div>
+
+<!-- React Application Mount Point -->
+<div id="root"></div>
+
+<!-- Data Bridge: OpenCart PHP → React JavaScript -->
+<script>
+// Simulate OpenCart passing data to React
+window.OPENCART_DATA = {
+    page: 'index',
+
+    certificates: [
+        {
+            certificate_id: 1,
+            name: 'Зимняя сказка',
+            description: 'Подарочный сертификат на отдых в зимнем глэмпинге с панорамными окнами и уютным интерьером',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600'
+        },
+        {
+            certificate_id: 2,
+            name: 'Романтический закат',
+            description: 'Идеальный подарок для пары - отдых в романтическом глэмпинге с видом на природу',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600'
+        },
+        {
+            certificate_id: 3,
+            name: 'Семейное приключение',
+            description: 'Просторный глэмпинг для всей семьи с детской зоной и активностями на природе',
+            price: 25000,
+            image: 'https://images.unsplash.com/photo-1523978591478-c753949ff840?w=600'
+        },
+        {
+            certificate_id: 4,
+            name: 'Лесной уют',
+            description: 'Уединенный отдых в лесу с современными удобствами и атмосферой единения с природой',
+            price: 20000,
+            image: 'https://images.unsplash.com/photo-1520483601560-47d368af5d4a?w=600'
+        },
+        {
+            certificate_id: 5,
+            name: 'Морской бриз',
+            description: 'Глэмпинг на берегу моря или озера с террасой и захватывающими видами',
+            price: 30000,
+            image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600'
+        },
+        {
+            certificate_id: 6,
+            name: 'Горные вершины',
+            description: 'Отдых в горах с панорамными видами, свежим воздухом и активными развлечениями',
+            price: 35000,
+            image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'
+        }
+    ],
+
+    faq: [
+        {
+            question: 'Как долго действителен сертификат?',
+            answer: 'Сертификат действителен в течение 1 года с момента покупки. Получатель может выбрать любую дату в пределах этого срока для бронирования глэмпинга.'
+        },
+        {
+            question: 'Можно ли обменять или вернуть сертификат?',
+            answer: 'Да, неиспользованный сертификат можно вернуть в течение 14 дней с момента покупки. Также возможен обмен на сертификат другого номинала.'
+        },
+        {
+            question: 'Как получить сертификат?',
+            answer: 'Доступны три варианта: электронный сертификат на email (моментально), печатный в красивом конверте (доставка 3-5 дней), или подарочная коробка с сертификатом (доставка 3-5 дней).'
+        }
+    ],
+
+    howItWorks: [
+        {
+            step: 1,
+            title: 'Выберите сертификат',
+            description: 'Выберите номинал или конкретный глэмпинг из нашего каталога'
+        },
+        {
+            step: 2,
+            title: 'Оформите заказ',
+            description: 'Укажите данные получателя и выберите способ доставки'
+        },
+        {
+            step: 3,
+            title: 'Получатель выбирает отдых',
+            description: 'Получатель активирует сертификат и бронирует проживание'
+        }
+    ],
+
+    settings: {
+        api_url: '/certificates/api',
+        cart_url: '/checkout/cart'
+    },
+
+    customer: {
+        logged: false,
+        firstname: '',
+        email: ''
+    },
+
+    urls: {
+        cart: '/checkout/cart',
+        checkout: '/checkout/checkout',
+        login: '/account/login',
+        register: '/account/register'
+    }
+};
+
+console.log('✅ OpenCart data passed to React:', window.OPENCART_DATA);
+</script>
+
+<!-- Load React Application CSS from GitHub Pages -->
+<link rel="stylesheet" href="https://gringo999max.github.io/Certificates20112025/assets/index-CT3lHhnO.css">
+
+<!-- Load React Application JavaScript from GitHub Pages -->
+<script type="module" src="https://gringo999max.github.io/Certificates20112025/assets/index-GKQx7YZW.js"></script>
+
+<!-- SEO Content Hide Script - Hide SEO layer when React loads -->
+<script>
+(function() {
+    'use strict';
+
+    console.log('🎬 Mock Preview: Monitoring React mount...');
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReactMonitor);
+    } else {
+        initReactMonitor();
+    }
+
+    function initReactMonitor() {
+        const seoContent = document.getElementById('seo-content');
+        const root = document.getElementById('root');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        if (!seoContent || !root) {
+            console.warn('⚠️ SEO content or React root not found');
+            return;
+        }
+
+        let checkCount = 0;
+        const maxChecks = 100; // Check for 10 seconds (100 * 100ms)
+
+        const checkReactMounted = setInterval(function() {
+            checkCount++;
+
+            // Check if React has rendered content
+            if (root.children.length > 0) {
+                console.log('✅ React mounted successfully!');
+                console.log('📊 React has', root.children.length, 'child elements');
+
+                // Hide SEO content
+                seoContent.style.display = 'none';
+
+                // Hide loading indicator
+                loadingIndicator.classList.remove('active');
+
+                clearInterval(checkReactMounted);
+
+                // Show success message
+                setTimeout(function() {
+                    console.log('🎉 Integration complete: SEO content hidden, React UI visible');
+                }, 500);
+
+                return;
+            }
+
+            // Stop checking after max attempts
+            if (checkCount >= maxChecks) {
+                clearInterval(checkReactMounted);
+                loadingIndicator.classList.remove('active');
+                console.warn('⚠️ React did not mount within 10 seconds - keeping SEO content visible');
+                console.log('ℹ️ This is normal if React files failed to load');
+            }
+        }, 100);
+    }
+})();
+</script>
+
+<!-- Mock OpenCart Footer -->
+<footer class="opencart-footer">
+    <div class="container">
+        <div class="footer-column">
+            <h4>О компании</h4>
+            <a href="#about">О нас</a>
+            <a href="#contacts">Контакты</a>
+            <a href="#partners">Партнерам</a>
+            <a href="#career">Карьера</a>
+        </div>
+        <div class="footer-column">
+            <h4>Покупателям</h4>
+            <a href="#delivery">Доставка и оплата</a>
+            <a href="#return">Возврат товара</a>
+            <a href="#guarantee">Гарантия</a>
+            <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-column">
+            <h4>Каталог</h4>
+            <a href="#glampings">Глэмпинги</a>
+            <a href="#certificates">Сертификаты</a>
+            <a href="#gifts">Подарки</a>
+            <a href="#accessories">Аксессуары</a>
+        </div>
+        <div class="footer-column">
+            <h4>Контакты</h4>
+            <p style="margin-bottom: 8px;">📞 +7 (800) 123-45-67</p>
+            <p style="margin-bottom: 8px;">📧 info@глэмпинги.рф</p>
+            <p>🕐 Пн-Пт: 9:00-21:00</p>
+        </div>
+    </div>
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 30px; border-top: 1px solid #333; text-align: center; color: #666;">
+        <p>© 2025 Глэмпинги.рф - Подарочные сертификаты на отдых в глэмпингах</p>
+        <p style="margin-top: 10px; font-size: 0.875rem;">
+            🎭 MOCK PREVIEW - Демонстрация интеграции OpenCart + React
+        </p>
+    </div>
+</footer>
+
+<!-- Console Info -->
+<script>
+console.log('%c🎭 MOCK PREVIEW MODE', 'background: #fef3c7; color: #78350f; font-size: 16px; font-weight: bold; padding: 10px;');
+console.log('%cЭто демонстрация интеграции OpenCart + React', 'font-size: 12px; color: #666;');
+console.log('%c\n📋 Что происходит:', 'font-weight: bold;');
+console.log('1️⃣ Имитация OpenCart header/footer');
+console.log('2️⃣ SEO контент виден в HTML (для поисковиков)');
+console.log('3️⃣ window.OPENCART_DATA передает данные в React');
+console.log('4️⃣ React загружается с GitHub Pages');
+console.log('5️⃣ React скрывает SEO контент и показывает UI');
+console.log('\n🔍 Проверьте:');
+console.log('• window.OPENCART_DATA - данные от OpenCart');
+console.log('• #seo-content - SEO слой (должен скрыться)');
+console.log('• #root - React приложение (должно появиться)');
+</script>
+
+</body>
+</html>
