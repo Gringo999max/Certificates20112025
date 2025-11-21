@@ -4,6 +4,7 @@
   import path from 'path';
 
   export default defineConfig({
+    base: '/Certificates20112025/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -41,6 +42,9 @@
         'figma:asset/4c8b6db05c932cfffc985522af051f14decfbd9b.png': path.resolve(__dirname, './src/assets/4c8b6db05c932cfffc985522af051f14decfbd9b.png'),
         'figma:asset/4aea96e41c4e52607c9611a364a6da071e0abac4.png': path.resolve(__dirname, './src/assets/4aea96e41c4e52607c9611a364a6da071e0abac4.png'),
         'figma:asset/473c627910d9537f1ff6b8d1db2964f79ea88c39.png': path.resolve(__dirname, './src/assets/473c627910d9537f1ff6b8d1db2964f79ea88c39.png'),
+        'figma:asset/4dfccd32ae5af0dcede65e0fcd60b91d87c1af55.png': path.resolve(__dirname, './src/assets/473c627910d9537f1ff6b8d1db2964f79ea88c39.png'),
+        'figma:asset/5c6c59f6aa8c5c01b8c2663f5fdf7353fc82e4e1.png': path.resolve(__dirname, './src/assets/bf412929b27600f04ec71124eb18e40eb9366774.png'),
+        'figma:asset/91c370a99c7e6e4aa88dbd1d52bbb76ad43c4d82.png': path.resolve(__dirname, './src/assets/0c06a85ab403bb43c88e7bd4c6161dca48c59a1d.png'),
         'figma:asset/31e0ef610d564e9ff53b08c79ad785a20bb1a154.png': path.resolve(__dirname, './src/assets/31e0ef610d564e9ff53b08c79ad785a20bb1a154.png'),
         'figma:asset/2c94ccc2413274e45d27396820e5564643720681.png': path.resolve(__dirname, './src/assets/2c94ccc2413274e45d27396820e5564643720681.png'),
         'figma:asset/293e6f029cf7d6d9e4dc6cae39cfb49e995ba323.png': path.resolve(__dirname, './src/assets/293e6f029cf7d6d9e4dc6cae39cfb49e995ba323.png'),
