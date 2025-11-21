@@ -1,14 +1,21 @@
-# 🎁 Модуль "Подарочные сертификаты" для OpenCart
+# 🎁 OpenCart React Certificates Module
 
-**Версия:** 1.0
-**Дата:** 21 ноября 2025
-**Статус:** ✅ Готов к установке
+**Version:** 2.0 - React Integration
+**Technology:** React 18 + TypeScript + Vite + OpenCart PHP
+**Date:** November 21, 2025
+**Status:** ✅ Ready for Production
 
 ---
 
-## 📦 ЧТО ВКЛЮЧЕНО
+## 📖 Overview
 
-Этот модуль представляет собой полную конвертацию React-приложения подарочных сертификатов в OpenCart PHP-шаблоны.
+This module integrates a modern React-based certificates application with OpenCart using a hybrid architecture that combines:
+
+- ✨ **Beautiful React UI** - Modern, responsive interface built with React 18 + TypeScript
+- 🔧 **OpenCart Backend** - Leverages OpenCart's cart, checkout, and payment systems
+- 🚀 **SEO-Friendly** - Server-rendered HTML content for search engines
+- 📱 **Progressive Enhancement** - Works without JavaScript, enhanced with React
+- 🎯 **Multiple Pages** - Home, Delivery, Corporate, Reviews, About, Activation
 
 ### Структура модуля:
 
