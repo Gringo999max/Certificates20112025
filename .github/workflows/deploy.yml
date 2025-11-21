@@ -36,6 +36,11 @@ jobs:
           cd "Сертификаты на деплой полная версия 09112025"
           npm run build
 
+      - name: Copy OpenCart preview files
+        run: |
+          cp -r opencart_files "Сертификаты на деплой полная версия 09112025/build/"
+          cp certificates-preview.html "Сертификаты на деплой полная версия 09112025/build/"
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
