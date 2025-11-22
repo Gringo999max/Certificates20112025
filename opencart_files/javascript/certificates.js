@@ -435,12 +435,6 @@
         resetForm();
     });
 
-    // ===== ДЕБАГ В КОНСОЛЬ (убрать в продакшн) ===== //
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log('Certificates JS loaded');
-        console.log('jQuery version:', $.fn.jquery);
-    }
-
 })(jQuery);
 
 // ===== ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ ===== //
