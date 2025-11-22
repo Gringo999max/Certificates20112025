@@ -113,7 +113,8 @@
 </div>
 
 <!-- Отзывы -->
-<?php include 'blocks/reviews.tpl'; ?>
+<!-- TODO: Добавить reviews.tpl если необходимо -->
+<?php // include 'blocks/reviews.tpl'; ?>
 
 <!-- FAQ -->
 <?php include 'blocks/faq.tpl'; ?>

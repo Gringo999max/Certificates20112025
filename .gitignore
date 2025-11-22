@@ -54,3 +54,6 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
+
+# Old versions / backups
+Сертификаты*/
