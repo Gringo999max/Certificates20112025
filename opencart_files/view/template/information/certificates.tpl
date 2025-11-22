@@ -1,8 +1,8 @@
 <?php echo $header; ?>
 
 <!-- Подключение стилей и скриптов -->
-<link href="/catalog/view/theme/default/stylesheet/static/certificates.css?v=2.0" rel="stylesheet">
-<script src="/catalog/view/javascript/informations/certificates.js?v=2.0"></script>
+<link href="catalog/view/stylesheet/certificates.min.css?v=2.0" rel="stylesheet">
+<script src="catalog/view/javascript/certificates.min.js?v=2.0"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
